@@ -21,6 +21,9 @@
 
           <!-- Preset Actions -->
           <div class="preset-actions">
+            <button class="btn ai-btn" onclick="showGenerateWithAI()">
+              🤖 Generate with AI
+            </button>
             <button class="btn" onclick="showSavePresetModal()">
               💾 Save Current as Preset
             </button>
@@ -217,6 +220,15 @@
             <button class="btn btn-secondary" onclick="downloadJSON()">
               💾 Download JSON
             </button>
+            <button
+              class="btn ai-btn"
+              onclick="enhanceCurrentJSON()"
+              style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              "
+            >
+              🧠 Enhance with AI
+            </button>
             <div id="successBanner" class="success-banner">
               ✓ Copied to clipboard!
             </div>
@@ -293,8 +305,49 @@
       </div>
     </div>
 
+    <!-- AI Generation Modal -->
+    <div id="aiGenerationModal" class="modal">
+      <div class="modal-content">
+        <h3>🤖 Generate Preset with AI</h3>
+        <p class="subtitle" style="margin-top: 8px; font-size: 14px">
+          Describe the scene you want to create
+        </p>
+        <div class="form-group">
+          <label>Scene Description</label>
+          <textarea
+            id="aiPromptInput"
+            rows="4"
+            placeholder="e.g., 'A professional business portrait in a modern office with natural window lighting' or 'Moody cyberpunk street scene at night with neon lights reflecting on wet pavement'"
+          ></textarea>
+          <small
+            style="
+              color: var(--color-text-secondary);
+              margin-top: 4px;
+              display: block;
+            "
+          >
+            Be as detailed as possible for best results
+          </small>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" onclick="hideAIGenerationModal()">
+            Cancel
+          </button>
+          <button class="btn" onclick="generatePresetFromAI()">
+            ✨ Generate Preset
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enhancement Suggestions Container -->
+    <div id="enhancementSuggestions" style="display: none; margin-top: 24px">
+      <!-- Suggestions will be dynamically inserted here -->
+    </div>
+
     <!-- Load Scripts -->
     <script src="presets.js"></script>
+    <script src="gemini-integration.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

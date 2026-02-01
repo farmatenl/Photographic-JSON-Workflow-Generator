@@ -371,3 +371,145 @@ textarea {
   width: auto;
   flex: 1;
 }
+
+/* AI Features Styling */
+.ai-btn {
+  background: linear-gradient(135deg, #21808d 0%, #1d7480 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.ai-btn:hover::before {
+  left: 100%;
+}
+
+.ai-loading {
+  opacity: 0.6;
+  pointer-events: none;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.ai-banner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+}
+
+#enhancementSuggestions {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--color-surface);
+  border-radius: 12px;
+  border: 2px dashed rgba(102, 126, 234, 0.3);
+}
+
+.suggestion-card {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  transition: all 0.2s ease;
+}
+
+.suggestion-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(33, 128, 141, 0.15);
+}
+
+.suggestion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suggestion-category {
+  display: inline-block;
+  padding: 4px 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.suggestion-field {
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.suggestion-current,
+.suggestion-improvement,
+.suggestion-reasoning {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.suggestion-current {
+  color: var(--color-text-secondary);
+}
+
+.suggestion-improvement {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.suggestion-reasoning {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  border-left: 3px solid rgba(102, 126, 234, 0.3);
+  padding-left: 12px;
+  margin-top: 12px;
+}
+
+/* Dark mode AI adjustments */
+@media (prefers-color-scheme: dark) {
+  #enhancementSuggestions {
+    background: #1a1a1a;
+    border-color: rgba(102, 126, 234, 0.4);
+  }
+
+  .suggestion-card {
+    background: #242424;
+  }
+
+  .suggestion-field {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
