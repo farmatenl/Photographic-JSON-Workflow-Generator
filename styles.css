@@ -148,7 +148,6 @@ textarea {
 .btn-secondary {
   background: var(--color-secondary);
   color: var(--color-text);
-  margin-top: 12px;
 }
 
 .btn-secondary:hover {
@@ -512,4 +511,17 @@ textarea {
   .suggestion-field {
     background: rgba(255, 255, 255, 0.05);
   }
+}
+
+/* Button Group for action buttons */
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.button-group .btn {
+  flex: 1;
+  min-width: 150px;
 }
