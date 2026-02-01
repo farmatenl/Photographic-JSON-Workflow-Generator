@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photographic JSON Workflow Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Photographic JSON Workflow Generator</h1>
+      <p class="subtitle">
+        Generate hyper-realistic photographic reconstruction JSON templates for
+        different scenes, scenarios, and seasons
+      </p>
+
+      <div class="layout">
+        <!-- Input Panel -->
+        <div class="card">
+          <h2>Scene Configuration</h2>
+
+          <!-- Preset Actions -->
+          <div class="preset-actions">
+            <button class="btn" onclick="showSavePresetModal()">
+              💾 Save Current as Preset
+            </button>
+          </div>
+
+          <!-- Presets Grid -->
+          <div class="presets" id="presetsContainer">
+            <!-- Presets will be dynamically rendered here -->
+          </div>
+
+          <div class="section-group">
+            <h3>📸 Technical Settings</h3>
+            <div class="form-group">
+              <label>Aspect Ratio</label>
+              <select id="aspectRatio">
+                <option value="3:4">3:4 (Portrait)</option>
+                <option value="16:9">16:9 (Landscape)</option>
+                <option value="1:1">1:1 (Square)</option>
+                <option value="4:5">4:5 (Instagram Portrait)</option>
+                <option value="9:16">9:16 (Vertical Stories)</option>
+              </select>
+            </div>
+            <div class="inline-group">
+              <div class="form-group">
+                <label>Resolution</label>
+                <select id="resolution">
+                  <option value="8K RAW / Master Quality">
+                    8K RAW / Master Quality
+                  </option>
+                  <option value="4K UHD / High Quality">
+                    4K UHD / High Quality
+                  </option>
+                  <option value="HD / Standard Quality">
+                    HD / Standard Quality
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Engine Mode</label>
+                <select id="engineMode">
+                  <option value="Physical Rendering (PBR)">
+                    Physical Rendering (PBR)
+                  </option>
+                  <option value="Cinematic Ray Tracing">
+                    Cinematic Ray Tracing
+                  </option>
+                  <option value="Stylized Rendering">Stylized Rendering</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-group">
+            <h3>👤 Subject Details</h3>
+            <div class="form-group">
+              <label>Identity/Reference</label>
+              <input
+                type="text"
+                id="identity"
+                placeholder="e.g., Reference image, Person A"
+              />
+            </div>
+            <div class="form-group">
+              <label>Gaze Direction</label>
+              <input
+                type="text"
+                id="gaze"
+                placeholder="e.g., Direct-to-lens, Looking away"
+              />
+            </div>
+            <div class="form-group">
+              <label>Expression</label>
+              <input
+                type="text"
+                id="expression"
+                placeholder="e.g., Slight natural smile, Focused concentration"
+              />
+            </div>
+            <div class="form-group">
+              <label>Hair Color & Style</label>
+              <input
+                type="text"
+                id="hair"
+                placeholder="e.g., Deep red / Long / Straight"
+              />
+            </div>
+            <div class="form-group">
+              <label>Eye Color</label>
+              <input
+                type="text"
+                id="eyeColor"
+                placeholder="e.g., Light grey-blue, Hazel brown"
+              />
+            </div>
+          </div>
+
+          <div class="section-group">
+            <h3>👕 Wardrobe & Styling</h3>
+            <div class="form-group">
+              <label>Main Outfit</label>
+              <textarea
+                id="outfit"
+                placeholder="Describe the main clothing items (e.g., White quilted winter jacket, Black contrast collar)"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label>Accessories</label>
+              <input
+                type="text"
+                id="accessories"
+                placeholder="e.g., Beanie, sunglasses, jewelry"
+              />
+            </div>
+          </div>
+
+          <div class="section-group">
+            <h3>🌍 Environment Settings</h3>
+            <div class="form-group">
+              <label>Location/Setting</label>
+              <input
+                type="text"
+                id="location"
+                placeholder="e.g., Alpine Ski Resort, Tropical Beach"
+              />
+            </div>
+            <div class="form-group">
+              <label>Season</label>
+              <select id="season">
+                <option value="Winter">Winter</option>
+                <option value="Spring">Spring</option>
+                <option value="Summer">Summer</option>
+                <option value="Autumn">Autumn</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Time of Day</label>
+              <select id="timeOfDay">
+                <option value="Crisp natural daylight">
+                  Crisp natural daylight
+                </option>
+                <option value="Golden hour / Warm sunset">
+                  Golden hour / Warm sunset
+                </option>
+                <option value="Blue hour / Evening twilight">
+                  Blue hour / Evening twilight
+                </option>
+                <option value="Midday harsh sunlight">
+                  Midday harsh sunlight
+                </option>
+                <option value="Overcast soft lighting">
+                  Overcast soft lighting
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Background Elements</label>
+              <textarea
+                id="background"
+                placeholder="List background elements (e.g., Snow-capped mountains, Active ski lift)"
+              ></textarea>
+            </div>
+          </div>
+
+          <button class="btn" onclick="generateJSON()">🚀 Generate JSON</button>
+          <button class="btn btn-secondary" onclick="resetForm()">
+            🔄 Reset Form
+          </button>
+        </div>
+
+        <!-- Output Panel -->
+        <div class="card">
+          <div class="tabs">
+            <button class="tab active" onclick="switchTab('formatted')">
+              Formatted JSON
+            </button>
+            <button class="tab" onclick="switchTab('raw')">Raw JSON</button>
+            <button class="tab" onclick="switchTab('workflow')">
+              Antigravity Workflow
+            </button>
+          </div>
+
+          <div id="formatted-tab">
+            <h2>Generated JSON Template</h2>
+            <div class="output-area" id="jsonOutput">
+              Click "Generate JSON" to create your template...
+            </div>
+            <button
+              class="btn"
+              onclick="copyToClipboard()"
+              style="margin-top: 16px"
+            >
+              📋 Copy to Clipboard
+            </button>
+            <button class="btn btn-secondary" onclick="downloadJSON()">
+              💾 Download JSON
+            </button>
+            <div id="successBanner" class="success-banner">
+              ✓ Copied to clipboard!
+            </div>
+          </div>
+
+          <div id="raw-tab" style="display: none">
+            <h2>Raw JSON (Minified)</h2>
+            <div class="output-area" id="rawOutput">
+              Click "Generate JSON" to create your template...
+            </div>
+            <button class="btn" onclick="copyRaw()" style="margin-top: 16px">
+              📋 Copy Raw JSON
+            </button>
+            <div id="rawSuccessBanner" class="success-banner">
+              ✓ Raw JSON copied to clipboard!
+            </div>
+          </div>
+
+          <div id="workflow-tab" style="display: none">
+            <h2>Antigravity Workflow File</h2>
+            <p
+              style="
+                color: var(--color-text-secondary);
+                font-size: 13px;
+                margin-bottom: 16px;
+              "
+            >
+              Save this as
+              <code
+                style="
+                  background: var(--color-secondary);
+                  padding: 2px 6px;
+                  border-radius: 4px;
+                "
+                >.agent/workflows/generate-photo-json.md</code
+              >
+              in your Antigravity workspace
+            </p>
+            <div class="output-area" id="workflowOutput">
+              Click "Generate JSON" to create workflow file...
+            </div>
+            <button
+              class="btn"
+              onclick="downloadWorkflow()"
+              style="margin-top: 16px"
+            >
+              💾 Download Workflow File
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save Preset Modal -->
+    <div id="savePresetModal" class="modal">
+      <div class="modal-content">
+        <h3>Save Custom Preset</h3>
+        <div class="form-group">
+          <label>Preset Name</label>
+          <input
+            type="text"
+            id="presetNameInput"
+            placeholder="e.g., 🌲 Mountain Hiking"
+          />
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" onclick="hideSavePresetModal()">
+            Cancel
+          </button>
+          <button class="btn" onclick="saveCurrentAsPreset()">
+            Save Preset
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Load Scripts -->
+    <script src="presets.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
